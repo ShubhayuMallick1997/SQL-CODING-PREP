@@ -170,5 +170,29 @@ where ReviewText LIKE '%love%';
 
 ```
 
+# **Aggregate Functions**
+
+Your challenge is to write a single SQL query to find the total number of orders and the average order amount from the Orders table. The solution should include only orders made in August 2023.
+
+Use the aliases TotalOrders and AverageOrderAmount in your query.
+
+Column names:
+
+OrderID , 
+
+Amount ,
+
+OrderDate
+
+Remember, you know how to use COUNT(), AVG(), WHERE, BETWEEN, and other basic SQL commands without grouping.
+
+``` sql
+
+select count(OrderID) as TotalOrders , 
+avg(Amount) as AverageOrderAmount 
+from orders;
+
+```
+
 
 
