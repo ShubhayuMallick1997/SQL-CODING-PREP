@@ -194,5 +194,96 @@ from orders;
 
 ```
 
+# **GROUP BY**
+Using the sales_data table, write a SQL query to calculate the total quantity sold and the total sale_amount for each category.
+
+Your query should return columns for the category, the sum of quantity as total_quantity, and the sum of sale_amount as total_sales_amount. Order the results by total_sales_amount in descending order.
+
+Important columns:
+
+category
+
+quantity
+
+sale_amount
+
+``` sql
+
+select category , 
+sum(quantity) as total_quantity ,
+sum(sale_amount) as total_sales_amount
+from sales_data
+group by category
+order by total_sales_amount DESC;
+
+```
+
+# **GROUP BY multiple columns**
+
+Create a query showing the total sales amount (AS total_sales_amount) and total number of items sold  (AS total_items_sold), grouped by category and sale_date. Order the results by category in ascending order and then by sale_date in ascending order.
+
+Use the sales table with columns: category, sale_date, amount.
+
+Note: You can assume one row in the table represents one item sold.
+
+``` sql
+
+select category , sale_date , 
+sum(amount) as total_sales_amount ,
+count(amount) as total_items_sold 
+from sales 
+group by category , sale_date
+order by category , sale_date;
+
+```
+
+# **HAVING**
+
+Find the cities with more than two transactions where the average transaction amount exceeds $150.00. List the city and the average transaction amount (AS AverageAmount), sorted by the average transaction amount in descending order.
+
+Necessary Information
+
+Table name: Sales
+
+Columns to consider: City, Amount, TransactionID
+
+``` sql
+
+select City ,
+AVG(Amount) as AverageAmount
+from Sales 
+Group by City
+HAVING AVG(Amount) > 150 and Count(TransactionID) > 2
+Order by AVG(Amount) desc ;
+
+
+```
+
+
+# **LENGTH, LOWER & UPPER**
+
+Write a SQL query to find all reviews for product_id = 101 where the review text contains the word "great" (case insensitive), and order the results by the length of the review text (from shortest to longest).
+
+Return the review_id, review_text, and the length of the review_text (use alias review_length).
+
+Relevant table: 
+
+customer_reviews
+
+
+``` sql
+
+select review_id , 
+review_text , 
+LENGTH(review_text) as review_length
+from customer_reviews
+where product_id = 101 
+and LOWER(review_text) LIKE ('%great%')
+order by review_text ASC;
+
+```
+
+
+
 
 
