@@ -298,6 +298,106 @@ as product_summary from products order by name ASC
 ```
 
 
+# **Mathematical functions and operators**
+
+Return the product with the highest total revenue. Return the product name and its total revenue (alias: total_revenue). You need to use mathematical operators to calculate the total revenue for each product (quantity_sold * price_per_unit) and aggregate functions to find the sum of revenues for each product.
+
+Table Name: sales
+
+Column Names: product_name, quantity_sold, price_per_unit
+
+
+``` sql
+
+SELECT 
+    product_name,
+    SUM(quantity_sold * price_per_unit) AS total_revenue
+FROM 
+    sales
+GROUP BY 
+    product_name
+ORDER BY 
+    total_revenue DESC
+    Limit 1;
+
+
+```
+
+
+# **CASE WHEN**
+
+Using the sales_orders table, write a SQL query to select the order_id, product_id, quantity, unit_price, and a new column named total_price. The total_price should be calculated as follows:
+
+If a customer orders more than 1 unit of any product, they get a 10% discount on the total price for those products before adding the shipping fee.
+
+The total_price should include the shipping fee.
+
+You must use CASE WHEN to calculate the discounted price where applicable.
+
+Table Name: sales_orders
+
+Columns to use:
+
+order_id
+
+product_id
+
+quantity
+
+unit_price
+
+shipping_fee
+
+
+``` sql
+
+Select 
+
+order_id, 
+product_id, 
+quantity,
+unit_price ,
+
+( Case 
+    When quantity > 1 Then ((unit_price * quantity * 0.9) + shipping_fee)
+    Else ( unit_price * quantity + shipping_fee )
+    
+ End ) as total_price 
+
+From sales_orders ;
+    
+
+```
+
+
+# **CASE WHEN & SUM**
+
+Write a single SQL query to calculate the total income and total expenses from the transactions table.
+
+
+Additionally, calculate the net income (total income - total expenses) as a separate column in the result.
+
+Key information for the challenge:
+
+Table name: transactions
+
+Column names needed: amount, category
+
+Use aliases for the total income, total expenses, and net income as TotalIncome, TotalExpenses, and NetIncome, respectively.
+
+
+``` sql
+
+SELECT 
+    SUM(CASE WHEN category = 'Income' THEN amount ELSE 0 END) AS TotalIncome,
+    SUM(CASE WHEN category = 'Expense' THEN amount ELSE 0 END) AS TotalExpenses,
+    SUM(CASE WHEN category = 'Income' THEN amount ELSE 0 END) 
+      - SUM(CASE WHEN category = 'Expense' THEN amount ELSE 0 END) AS NetIncome
+FROM 
+    transactions;
+
+```
+
 
 
 
