@@ -399,5 +399,49 @@ FROM
 ```
 
 
+# **COALESCE**
+
+Consider the following table called transactions:
+
+
+Write a SQL query to retrieve all transactions, displaying the transaction ID, account ID, transaction type, amount, and description.
+
+For any transactions that do not have a description, display 'Not Provided' in place of the NULL value. Ensure your query is ordered by the transaction ID. Make sure to not forget to use the alias description.
+
+Important columns: transaction_id, account_id, transaction_type, amount, description
+
+
+``` sql
+
+Select transaction_id, 
+account_id, 
+transaction_type, 
+amount, 
+coalesce(description , 'Not Provided') as description
+
+From transactions
+
+```
+
+
+# **CREATE & DROP DATABASE**
+
+Create a database called "customer" and then drop that same database again.
+
+Write both commands together in the solution.
+
+Use ";" to declare the end of the commands.
+
+``` sql
+
+Create database customer ;
+
+Drop database customer ;
+
+```
+
+
+
+
 
 
